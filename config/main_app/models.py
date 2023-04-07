@@ -4,29 +4,25 @@ from django.db import models
 
 
 class Product_img(models.Model):
-    name = models.ImageField()
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50)
+    image = models.ImageField()
 
     def __str__(self):
         return self.name
 
 
 class Size(models.Model):
-    name = models.PositiveIntegerField()
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50)
 
     def __str__(self):
         return self.name
 
 
 class Color(models.Model):
-    name = models.CharField(max_length=30)
-
-    def __str__(self):
-        return self.name
-
-
-class Sub_category(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100)
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50)
 
     def __str__(self):
         return self.name
@@ -35,8 +31,7 @@ class Sub_category(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
-    sub = models.ForeignKey(
-        Sub_category, on_delete=models.CASCADE, related_name="subs")
+    image = models.ImageField()
 
     def __str__(self):
         return self.name

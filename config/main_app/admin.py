@@ -17,7 +17,19 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}
 
 
-admin.site.register(Product_img)
-admin.site.register(Size)
-admin.site.register(Color)
-admin.site.register(Sub_category)
+@admin.register(Product_img)
+class Product_imgAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'slug', 'image']
+    prepopulated_fields = {"slug": ('name',)}
+
+
+@admin.register(Size)
+class SizeAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'slug']
+    prepopulated_fields = {"slug": ('name',)}
+
+
+@admin.register(Color)
+class ColorAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'slug']
+    prepopulated_fields = {"slug": ('name',)}
