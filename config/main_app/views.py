@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import Category
+from .models import Category, Product
 
 # Create your views here.
 
@@ -10,4 +10,10 @@ def homePageView(request):
 
 
 def detailPageView(request):
-    return render(request, 'detail.html')
+    products=Product.objects.filter(id=1).values()
+    # print(product)
+    data={
+        'product':products
+    }
+    print(data)
+    return render(request, 'detail.html', context=data)
