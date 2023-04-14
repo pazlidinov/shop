@@ -3,18 +3,11 @@ from django.db import models
 # Create your models here.
 
 
-class Product_img(models.Model):
-    name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
-    image = models.ImageField()
-
-    def __str__(self):
-        return self.name
 
 
 class Size(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
+    slug = models.SlugField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
@@ -22,7 +15,7 @@ class Size(models.Model):
 
 class Color(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
+    slug = models.SlugField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
@@ -30,7 +23,7 @@ class Color(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True)
     image = models.ImageField()
 
     def __str__(self):
@@ -40,19 +33,25 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=150)
     slug = models.SlugField(max_length=150, unique=True)
-    img = models.ForeignKey(
-        Product_img, on_delete=models.CASCADE, related_name='imgs')
+    img=models.ImageField()
     count = models.PositiveIntegerField(default=0)
     price = models.PositiveIntegerField(default=0)
     view = models.PositiveIntegerField(default=0)
     description = models.TextField()
     added_date = models.DateField(auto_now_add=True)
-    size = models.ForeignKey(
-        Size, on_delete=models.PROTECT, related_name='sizes')
-    color = models.ForeignKey(
-        Color, on_delete=models.PROTECT, related_name='colors')
+    size = models.ManyToManyField(Size, related_name='sizes')
+    color = models.ManyToManyField(Color, related_name='colors')
     category = models.ForeignKey(
         Category, on_delete=models.PROTECT, related_name='categories')
+
+    def __str__(self):
+        return self.name
+
+
+class Product_img(models.Model):
+    name = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_img')
+    slug = models.SlugField(max_length=50)
+    image = models.ImageField()
 
     def __str__(self):
         return self.name
