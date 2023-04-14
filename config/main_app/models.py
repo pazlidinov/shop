@@ -39,7 +39,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=150)
-    slug = models.SlugField(max_length=150)
+    slug = models.SlugField(max_length=150, unique=True)
     img = models.ForeignKey(
         Product_img, on_delete=models.CASCADE, related_name='imgs')
     count = models.PositiveIntegerField(default=0)
