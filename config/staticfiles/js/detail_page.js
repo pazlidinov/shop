@@ -1,6 +1,4 @@
-// let count = document.getElementById(id = 'count')
-// num = Number(count.value)
-// console.log(typeof (count.value))
+// Product Quantity
 function minus() {
     let count = document.getElementById(id = 'count')
     num = Number(count.value)
