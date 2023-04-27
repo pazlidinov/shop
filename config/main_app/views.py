@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
 
-from .models import Category, Product
+from .models import Category, Product, Product_img
 
 # Create your views here.
 
 
-def homePageView(request):    
+def homePageView(request):
     return render(request, 'index.html')
 
 

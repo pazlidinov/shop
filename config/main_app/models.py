@@ -46,9 +46,5 @@ class Product(models.Model):
 
 
 class Product_img(models.Model):
-    name = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_img')
-    slug = models.SlugField(max_length=50)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_img')    
     image = models.ImageField()
-
-    def __str__(self):
-        return self.name
