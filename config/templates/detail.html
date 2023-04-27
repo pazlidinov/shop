@@ -25,13 +25,12 @@
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner bg-light">
 
-                    <div class="carousel-item active">
-                        <img class="w-100 h-100" src="{{ object.img.url }}" alt="Image">
+                    <div class="carousel-item active text-center">
+                        <img class="object-fit-cover" src="{{ object.img.url }}" alt="Image" height="600">
                     </div>
                     {% for item in object.product_img.all %}
-                    <div class="carousel-item">
-                        {{ item.image.url }}
-                        <img class="w-100 h-100" src="{{ item.image.url }}" alt="Image"">
+                    <div class="carousel-item text-center">                     
+                        <img class="object-fit-cover" src="{{ item.image.url }}" alt="Image"" height="600">
                     </div>
                     {% endfor %}                   
                 </div>
@@ -55,7 +54,7 @@
                         <small class="fas fa-star-half-alt"></small>
                         <small class="far fa-star"></small>
                     </div>
-                    <small class="pt-1">( {{ object.view }} Reviews)</small>
+                    <small class="pt-1">( {{ object.view }} Views)</small>
                 </div>
                 <h3 class="font-weight-semi-bold mb-4">$ {{object.price}}</h3>
                 <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit
