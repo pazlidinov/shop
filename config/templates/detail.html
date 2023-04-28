@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 
 
@@ -29,10 +30,10 @@
                         <img class="object-fit-cover" src="{{ object.img.url }}" alt="Image" height="600">
                     </div>
                     {% for item in object.product_img.all %}
-                    <div class="carousel-item text-center">                     
-                        <img class="object-fit-cover" src="{{ item.image.url }}" alt="Image"" height="600">
+                    <div class="carousel-item text-center">
+                        <img class="object-fit-cover" src="{{ item.image.url }}" alt="Image"" height=" 600">
                     </div>
-                    {% endfor %}                   
+                    {% endfor %}
                 </div>
                 <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                     <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -44,8 +45,8 @@
         </div>
 
         <div class="col-lg-7 h-auto mb-30">
-            <div class="h-100 bg-light p-30">        
-                <h3>{{ object.name|title }}</h3>           
+            <div class="h-100 bg-light p-30">
+                <h3>{{ object.name|title }}</h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
                         <small class="fas fa-star"></small>
@@ -64,36 +65,37 @@
                 </p>
                 <div class="d-flex mb-3">
                     <strong class="text-dark mr-3">Sizes:</strong>
-                    <form>                       
+                    <form>
                         {% for size in object.size.all %}
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-2" name="size">
-                            <label class="custom-control-label" for="size-2">{{size}}</label>
+                            <input type="radio" class="custom-control-input" id="size-{{size.id}}" name="size">
+                            <label class="custom-control-label" for="size-{{size.id}}">{{size}}</label>
                         </div>
-                        {% endfor %}                       
+                        {% endfor %}
                     </form>
                 </div>
                 <div class="d-flex mb-4">
                     <strong class="text-dark mr-3">Colors:</strong>
                     <form>
+                        {% csrf_token %}
                         {% for color in object.color.all %}
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-1" name="color">
-                            <label class="custom-control-label" for="color-1">{{color}}</label>
+                            <input type="radio" class="custom-control-input" id="color-{{color.id}}" name="color">
+                            <label class="custom-control-label" for="color-{{color.id}}">{{color}}</label>
                         </div>
-                        {% endfor %}                   
+                        {% endfor %}
                     </form>
                 </div>
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
-                            <button onclick= "minus()" class="btn btn-primary btn-minus">
+                            <button onclick="minus()" class="btn btn-primary btn-minus">
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
                         <input id='count' type="text" class="form-control bg-secondary border-0 text-center" value="1">
                         <div class="input-group-btn">
-                            <button onclick= "plus()" class="btn btn-primary btn-plus">
+                            <button onclick="plus()" class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
