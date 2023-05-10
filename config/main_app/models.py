@@ -1,6 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Avg
 
 # Create your models here.
+
 
 class Size(models.Model):
     name = models.CharField(max_length=50)
@@ -30,7 +33,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=150)
     slug = models.SlugField(max_length=150, unique=True)
-    img=models.ImageField()
+    img = models.ImageField()
     count = models.PositiveIntegerField(default=0)
     price = models.PositiveIntegerField(default=0)
     view = models.PositiveIntegerField(default=0)
@@ -41,10 +44,29 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.PROTECT, related_name='categories')
 
+    @property
+    def average_rating(self):
+        rating = self.rating_set.all().aggregate(Avg('value'))['value__avg']
+        if rating:
+            return rating
+        else:
+            return 0
+
     def __str__(self):
         return self.name
 
 
 class Product_img(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_img')    
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='product_img')
     image = models.ImageField()
+
+
+class Comment(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='product_comments')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+    comment = models.TextField()
+    published= models.DateField(auto_now_add=True)
+    def __str__(self):
+        return str(self.product.slug)

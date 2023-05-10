@@ -8,7 +8,7 @@ from .models import *
 
 @admin.register(Product_img)
 class Product_imgAdmin(admin.ModelAdmin):
-    list_display = ['id', 'image_tag','image']
+    list_display = ['id', 'image_tag', 'image']
     # list_editable = ['image']
     # list_display_links = ['image']
     list_per_page = 10
@@ -40,3 +40,6 @@ class SizeAdmin(admin.ModelAdmin):
 class ColorAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'slug']
     prepopulated_fields = {"slug": ('name',)}
+
+
+admin.site.register(Comment)
