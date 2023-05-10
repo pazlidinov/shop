@@ -33,9 +33,9 @@ class ProductDetailView(DetailView):
             article.save()
         else:
             pass
-       
+
+
 def delete_comment(request, comment_id):
     com = Comment.objects.get(pk=comment_id)
     com.delete()
- 
-    return redirect("home:detail",1)
+    return redirect("home:detail", com.product.id)
