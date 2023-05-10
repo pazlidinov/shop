@@ -89,10 +89,10 @@
         var button = $(this);
         var oldValue = button.parent().parent().find('input').val();
         if (button.hasClass('btn-plus')) {
-            var newVal = parseFloat(oldValue) + 5;
+            var newVal = parseFloat(oldValue) + 1;
         } else {
             if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 5;
+                var newVal = parseFloat(oldValue) - 1;
             } else {
                 newVal = 0;
             }
@@ -101,18 +101,3 @@
     });
     
 })(jQuery);
-// Product Quantity
-function minus() {
-    let count=document.getElementById("count");
-    num=Number(count);
-    if (count>1) {
-        count.value=(num-5).toString();        
-    }
-};
-function plus() {
-    let count=document.getElementById("count");
-    num=Number(count);
-    if (count>1) {
-        count.value=(num+5).toString();        
-    }
-};
