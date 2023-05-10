@@ -11,17 +11,6 @@ def homePageView(request):
     return render(request, 'index.html')
 
 
-# def detailPageView(request, id=1):
-#     products=Product.objects.filter(id=id)
-#     print(products)
-#     # print(product)
-#     data={
-#         'product':products,
-#     }
-#     print(data)
-#     return render(request, 'detail.html', context=data)
-
-
 class ProductDetailView(DetailView):
     model = Product
     template_name = "detail.html"
@@ -33,6 +22,23 @@ class ProductDetailView(DetailView):
             article.save()
         else:
             pass
+
+
+def create_comment(request, pk):   
+    product = Product.objects.get(pk=pk)    
+
+    if request.method == "POST":
+        comment = request.POST.get("comment")
+        u = None
+        if request.user.is_authenticated:
+            u = request.user
+        else:
+            u = None
+
+        if len(comment) > 3:
+            Comment.objects.create(product=product, user=u, comment=comment)
+
+    return redirect("home:detail", pk)
 
 
 def delete_comment(request, comment_id):
