@@ -42,4 +42,5 @@ class ColorAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}
 
 
+admin.site.register(Rating)
 admin.site.register(Comment)

@@ -49,6 +49,7 @@
                 <h3>{{ object.name|title }}</h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
+
                         <small class="fas fa-star"></small>
                         <small class="fas fa-star"></small>
                         <small class="fas fa-star"></small>
@@ -186,25 +187,32 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4 class="mb-4">{{object.product_comments.count}} review for {{object.name|title}}</h4>
-                              
+
                                 {% for comment in object.product_comments.all %}
                                 <div class="media mb-4">
-                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
+                                    {% if comment.user.profile.image.url %}
+                                    <img src="{{comment.user.profile.image.url}}" alt="Image" lass="img-fluid mr-3 mt-1"
                                         style="width: 45px;">
+                                    {% else %}
+                                    <img src="../media/default_person_image.jpg" alt="Image" lass="img-fluid mr-3 mt-1"
+                                        style="width: 45px;">
+                                    {% endif %}
                                     <div class="media-body">
                                         <h6>
                                             {% if comment.user == None %}
-                                                Anonymus user
+                                            Anonymus user
                                             {% else %}
-                                                {{comment.user.username}}
+                                            {{comment.user.username}}
                                             {% endif %}
-                                            <small> - <i>{{comment.published}}</i></small></h6>
+                                            <small> - <i>{{comment.published}}</i></small>
+                                        </h6>
                                         <div class="text-primary mb-2">
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star-half-alt"></i>
                                             <i class="far fa-star"></i>
+
                                         </div>
                                         <p>{{comment.comment}}</p>
                                         {% if request.user.is_superuser %}
@@ -216,7 +224,7 @@
                                         {% endif %}
                                     </div>
                                 </div>
-                                   
+
                                 {% endfor %}
                             </div>
                             <div class="col-md-6">
@@ -225,38 +233,65 @@
                                 <div class="d-flex my-3">
                                     <p class="mb-0 mr-2">Your Rating * :</p>
                                     <div class="text-primary">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
+                                        <h3>Post rating : <span id="article_rating">{{object.average_rating}}</span>
+                                        </h3>
+                                        <div class="d-flex gap-3">
+                                            <a onclick="SetArticleRating(1, {{ object.id }} )"
+                                                class="text-decoration-none fs-4 text-warning d-flex flex-column text-center">
+                                                <i class="far fa-star"></i>
+                                                <span class="text-muted fs-5">1</span>
+                                            </a>
+                                            <a onclick="SetArticleRating(2, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
+                                                text-center">
+                                                <i class="far fa-star"></i>
+                                                <span class="text-muted fs-5">2</span>
+                                            </a>
+                                            <a onclick="SetArticleRating(3, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
+                                                text-center">
+                                                <i class="far fa-star"></i>
+                                                <span class="text-muted fs-5">3</span>
+                                            </a>
+                                            <a onclick="SetArticleRating(4, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
+                                                text-center">
+                                                <i class="far fa-star"></i>
+                                                <span class="text-muted fs-5">4</span>
+                                            </a>
+                                            <a onclick="SetArticleRating(5, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
+                                                text-center">
+                                                <i class="far fa-star"></i>
+                                                <span class="text-muted fs-5">5</span>
+                                            </a>
+                                            <input type="hidden" id="token" name="csrfmiddlewaretoken" value="">
+                                        </div>
+
                                     </div>
                                 </div>
                                 <form action="{% url 'main_app:create_comment' object.id %}" method="POST"">
                                     {% csrf_token %}
-                                    <div class="form-group">
-                                        <label for="message">Your Review *</label>
-                                        <textarea name="comment" id="message" cols="30" rows="5" class="form-control"></textarea>
-                                    </div>
-                                    <!-- <div class="form-group">
+                                    <div class=" form-group">
+                                    <label for="message">Your Review *</label>
+                                    <textarea name="comment" id="message" cols="30" rows="5"
+                                        class="form-control"></textarea>
+                            </div>
+                            <!-- <div class="form-group">
                                         <label for="name">Your Name *</label>
                                         <input type="text" class="form-control" id="name">
                                     </div> -->
-                                    <!-- <div class="form-group">
+                            <!-- <div class="form-group">
                                         <label for="email">Your Email *</label>
                                         <input type="email" class="form-control" id="email">
                                     </div> -->
-                                    <div class="form-group mb-0">
-                                        <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
-                                    </div>
-                                </form>
+                            <div class="form-group mb-0">
+                                <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- Shop Detail End -->
 
@@ -403,5 +438,33 @@
     </div>
 </div>
 <!-- Products End -->
+<script>
+    function SetArticleRating(rating, product_id) {
+        let product = document.querySelector("#product_rating")
+        let data = JSON.stringify(
+            {
+                rating: rating,
+                product_id: product_id,
+            }
+        )
 
+        console.log(product)
+        let url = `/add/rating/?data=${data}`
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data["status"] == 200) {
+                    product.innerHTML = Math.round(data["updated_rating"])
+                }
+                if (data["status"] == 400) {
+                    product.innerHTML = 'You already rated !'
+                }
+                if (data["status"] == 404) {
+                    product.innerHTML = 'Something went wrong!'
+                }
+            })
+
+    }
+</script>
 {% endblock %}

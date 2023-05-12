@@ -1,3 +1,7 @@
+import json
+
+from django.contrib import messages
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views.generic import DetailView
 
@@ -24,8 +28,8 @@ class ProductDetailView(DetailView):
             pass
 
 
-def create_comment(request, pk):   
-    product = Product.objects.get(pk=pk)    
+def create_comment(request, pk):
+    product = Product.objects.get(pk=pk)
 
     if request.method == "POST":
         comment = request.POST.get("comment")
@@ -45,3 +49,24 @@ def delete_comment(request, comment_id):
     com = Comment.objects.get(pk=comment_id)
     com.delete()
     return redirect("home:detail", com.product.id)
+
+
+def add_rating(request):
+
+    data = json.loads(request.GET.get("data"))
+    print(data)
+    if data:
+        product = Product.objects.get(pk=int(data.get("product_id")))
+        for rate in product.rating.all():
+            print(rate.user)
+            if request.user == rate.user:
+                return JsonResponse({"status": 400})
+        else:
+            Rating.objects.create(
+                value=int(data.get("rating")),
+                product=product,
+                user=request.user
+            )
+            return JsonResponse({"status": 200, "updated_rating": product.average_rating})
+    else:
+        return JsonResponse({"status": 404})

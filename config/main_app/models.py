@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Avg
 
@@ -46,7 +47,7 @@ class Product(models.Model):
 
     @property
     def average_rating(self):
-        rating = self.rating_set.all().aggregate(Avg('value'))['value__avg']
+        rating = self.rating.all().aggregate(Avg('value'))['value__avg']
         if rating:
             return rating
         else:
@@ -54,6 +55,12 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Rating(models.Model):
+    value = models.PositiveIntegerField(default=0)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="rating")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Product_img(models.Model):
