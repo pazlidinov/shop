@@ -49,12 +49,12 @@
                 <h3>{{ object.name|title }}</h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
-
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
+                        {% for i in '12345'|make_list %}
+                        {% if i < object.average_rating %} <i class="fas fa-star"></i>
+                            {% else %}
+                            <i class="far fa-star"></i>
+                            {% endif %}
+                            {% endfor %}
                     </div>
                     <small class="pt-1">( {{ object.view }} Views)</small>
                 </div>
@@ -207,6 +207,9 @@
                                             <small> - <i>{{comment.published}}</i></small>
                                         </h6>
                                         <div class="text-primary mb-2">
+                                            {% for rate in object.rating.all %}
+                                            {{rate.value}}
+                                            {% endfor %}
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
@@ -233,32 +236,30 @@
                                 <div class="d-flex my-3">
                                     <p class="mb-0 mr-2">Your Rating * :</p>
                                     <div class="text-primary">
-                                        <h3>Post rating : <span id="article_rating">{{object.average_rating}}</span>
-                                        </h3>
                                         <div class="d-flex gap-3">
                                             <a onclick="SetArticleRating(1, {{ object.id }} )"
                                                 class="text-decoration-none fs-4 text-warning d-flex flex-column text-center">
-                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star" id="1"></i>
                                                 <span class="text-muted fs-5">1</span>
                                             </a>
                                             <a onclick="SetArticleRating(2, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
                                                 text-center">
-                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star" id='2'></i>
                                                 <span class="text-muted fs-5">2</span>
                                             </a>
                                             <a onclick="SetArticleRating(3, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
                                                 text-center">
-                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star" id="3"></i>
                                                 <span class="text-muted fs-5">3</span>
                                             </a>
                                             <a onclick="SetArticleRating(4, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
                                                 text-center">
-                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star" id="4"></i>
                                                 <span class="text-muted fs-5">4</span>
                                             </a>
                                             <a onclick="SetArticleRating(5, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
                                                 text-center">
-                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star" id="5"></i>
                                                 <span class="text-muted fs-5">5</span>
                                             </a>
                                             <input type="hidden" id="token" name="csrfmiddlewaretoken" value="">
@@ -447,8 +448,18 @@
                 product_id: product_id,
             }
         )
+        for (let rate = 1; rate <= rating; rate++) {
+            let ratback = document.getElementById(rate);
+            ratback.classList.remove('far');
+            ratback.classList.add('fas');
+        }
+        for (let rate = rating + 1; rate <= 5; rate++) {
+            let ratback = document.getElementById(rate);
+            ratback.classList.remove('fas');
+            ratback.classList.add('far');
+        }
 
-        console.log(product)
+
         let url = `/add/rating/?data=${data}`
 
         fetch(url)

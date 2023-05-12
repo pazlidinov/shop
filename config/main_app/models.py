@@ -49,7 +49,7 @@ class Product(models.Model):
     def average_rating(self):
         rating = self.rating.all().aggregate(Avg('value'))['value__avg']
         if rating:
-            return rating
+            return str(rating)
         else:
             return 0
 
@@ -60,7 +60,7 @@ class Product(models.Model):
 class Rating(models.Model):
     value = models.PositiveIntegerField(default=0)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="rating")
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_rating')
 
 
 class Product_img(models.Model):
