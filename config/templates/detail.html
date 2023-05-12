@@ -206,17 +206,7 @@
                                             {% endif %}
                                             <small> - <i>{{comment.published}}</i></small>
                                         </h6>
-                                        <div class="text-primary mb-2">
-                                            {% for rate in object.rating.all %}
-                                            {{rate.value}}
-                                            {% endfor %}
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
-
-                                        </div>
+                                       
                                         <p>{{comment.comment}}</p>
                                         {% if request.user.is_superuser %}
                                         <div class="float-end">

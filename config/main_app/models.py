@@ -60,7 +60,7 @@ class Product(models.Model):
 class Rating(models.Model):
     value = models.PositiveIntegerField(default=0)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="rating")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_rating')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
 
 class Product_img(models.Model):

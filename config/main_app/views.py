@@ -54,7 +54,12 @@ def delete_comment(request, comment_id):
 def add_rating(request):
 
     data = json.loads(request.GET.get("data"))
-    print(data)
+    u = None
+    if request.user.is_authenticated:
+        u = request.user
+    else:
+        u = None
+
     if data:
         product = Product.objects.get(pk=int(data.get("product_id")))
         for rate in product.rating.all():
@@ -65,7 +70,7 @@ def add_rating(request):
             Rating.objects.create(
                 value=int(data.get("rating")),
                 product=product,
-                user=request.user
+                user=u
             )
             return JsonResponse({"status": 200, "updated_rating": product.average_rating})
     else:
