@@ -206,7 +206,7 @@
                                             {% endif %}
                                             <small> - <i>{{comment.published}}</i></small>
                                         </h6>
-                                       
+
                                         <p>{{comment.comment}}</p>
                                         {% if request.user.is_superuser %}
                                         <div class="float-end">
@@ -438,17 +438,18 @@
                 product_id: product_id,
             }
         )
-        for (let rate = 1; rate <= rating; rate++) {
+        for (let rate = 1; rate < 6; rate++) {
             let ratback = document.getElementById(rate);
-            ratback.classList.remove('far');
-            ratback.classList.add('fas');
-        }
-        for (let rate = rating + 1; rate <= 5; rate++) {
-            let ratback = document.getElementById(rate);
-            ratback.classList.remove('fas');
-            ratback.classList.add('far');
-        }
+            if (rate <= rating) {
+                ratback.classList.remove('far');
+                ratback.classList.add('fas');
+            }
+            if (rate > rating) {
+                ratback.classList.remove('fas');
+                ratback.classList.add('far');
+            }
 
+        }
 
         let url = `/add/rating/?data=${data}`
 
