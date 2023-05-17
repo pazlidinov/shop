@@ -44,6 +44,7 @@ class Product(models.Model):
     color = models.ManyToManyField(Color, related_name='colors')
     category = models.ForeignKey(
         Category, on_delete=models.PROTECT, related_name='categories')
+    discount = models.PositiveIntegerField("Discount %", default=0)
 
     @property
     def average_rating(self):
@@ -53,14 +54,28 @@ class Product(models.Model):
         else:
             return 0
 
+    def get_discount_price(self):
+        price = self.price
+        if self.discount:
+            discount = (self.price / 100) * self.discount
+            price = price - discount
+        else:
+            price = self.price
+        return int(round(price, 0))
+
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ["-id"]
 
 
 class Rating(models.Model):
     value = models.PositiveIntegerField(default=0)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="rating")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="rating")
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True)
 
 
 class Product_img(models.Model):
