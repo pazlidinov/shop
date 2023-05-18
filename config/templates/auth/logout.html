@@ -1,0 +1,26 @@
+{% extends "../base.html" %}
+{% load static %}
+{% block content %}
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="#">Home</a>
+                <span class="breadcrumb-item active">Sign out</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Signout Start -->
+<div class="container-fluid">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sign
+            out</span>
+    </h2>
+    <div class="container mx-auto">
+        <h3>You logged out , please come back <a href="{% url 'accounts:login' %}">now</a></h3>
+    </div>
+</div>
+<!-- Logout End -->
+{% endblock content %}
