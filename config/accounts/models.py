@@ -1,13 +1,15 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
 # Create your models here.
 class Contact(models.Model):
-    name = models.CharField(max_length=150)
-    # slug = models.SlugField(max_length=150, unique=True)
-    email = models.EmailField(max_length=250)
+    name = models.ForeignKey(User, on_delete=models.CASCADE)
     subject = models.CharField(max_length=250)
     message = models.TextField()
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ["-id"]

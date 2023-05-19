@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.template.defaultfilters import slugify
@@ -48,22 +49,21 @@ def my_register_view(request):
     return render(request, 'auth/register.html', context)
 
 
-class Contact(CreateView):
+class Contact(LoginRequiredMixin, CreateView):
     model = Contact
     form_class = ContactForm
-    # success_url = reverse_lazy("/")
     template_name = 'auth/contact.html'
+    success_url = reverse_lazy("/")
 
     def post(self, request):
         form = ContactForm(request.POST)
-        if request.user.is_authenticated:
-            form.name = request.user.username
-            form.email = request.user.email
-            print(form.name, form.email)
-        print(dir(form))
-        print(form.fields)
+
         if form.is_valid():
-            form.save()
+            print('ook1')
+            f = form.save(commit=False)
+            f.name = request.user
+
+            f.save()
             print('ok')
             return redirect('/')
         return render(request, 'auth/contact.html', {'form': form})
