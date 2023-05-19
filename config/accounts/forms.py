@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
+from.models import Contact
+
 
 class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(label='Username', min_length=5, max_length=150,
@@ -43,3 +45,16 @@ class CustomUserCreationForm(UserCreationForm):
             self.cleaned_data['password1']
         )
         return user
+
+
+class ContactForm(forms.ModelForm):
+
+    class Meta:
+        model = Contact
+        fields = ["name", "email", 'subject', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={"class": "form-control", 'placeholder': 'Your Name'}),
+            'email': forms.EmailInput(attrs={"class": "form-control", 'placeholder': 'Your Email'}),
+            'subject': forms.TextInput(attrs={"class": "form-control", 'placeholder': 'Subject'}),
+            'message': forms.TextInput(attrs={"class": "form-control", 'placeholder': 'Message'}),
+        }

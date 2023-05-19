@@ -1,8 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
 
-from .forms import CustomUserCreationForm
+from .forms import ContactForm, CustomUserCreationForm
+from .models import Contact
 
 
 # Create your views here.
@@ -42,3 +45,23 @@ def my_register_view(request):
             'form': form
         }
     return render(request, 'auth/register.html', context)
+
+
+class ContactForm(CreateView):
+    model = Contact
+    # fields = ["name", "email", 'subject', 'message']
+    form_class=ContactForm
+    success_url = reverse_lazy("/")
+    template_name='auth/contact.html'
+
+
+    # def get(self, request):
+    #     context = {'form': ContactForm()}
+    #     return render(request, 'auth/contact.html', context)
+
+    # def post(self, request):
+    #     form = ContactForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return render(request, '/')
+    #     return render(request, '/', {'form': form})
