@@ -56,9 +56,13 @@ class Contact(CreateView):
 
     def post(self, request):
         form = ContactForm(request.POST)
+        if request.user.is_authenticated:
+            form.name=request.user.username
+            form.email=request.user.email
         if form.is_valid():
-            f = form.save(commit=False)            
+            f = form.save(commit=False)  
+            print(f)          
             f.slug = slugify(f.name)
             form.save()
             return redirect('/')
-        return render(request, '/', {'form': form})
+        return render(request, 'auth/contact.html', {'form': form})
