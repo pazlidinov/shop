@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
+from django.template.defaultfilters import slugify
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 
@@ -47,21 +48,17 @@ def my_register_view(request):
     return render(request, 'auth/register.html', context)
 
 
-class ContactForm(CreateView):
+class Contact(CreateView):
     model = Contact
-    # fields = ["name", "email", 'subject', 'message']
-    form_class=ContactForm
+    form_class = ContactForm
     success_url = reverse_lazy("/")
-    template_name='auth/contact.html'
+    template_name = 'auth/contact.html'
 
-
-    # def get(self, request):
-    #     context = {'form': ContactForm()}
-    #     return render(request, 'auth/contact.html', context)
-
-    # def post(self, request):
-    #     form = ContactForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         return render(request, '/')
-    #     return render(request, '/', {'form': form})
+    def post(self, request):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)            
+            f.slug = slugify(f.name)
+            form.save()
+            return redirect('/')
+        return render(request, '/', {'form': form})
