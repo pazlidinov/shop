@@ -51,18 +51,19 @@ def my_register_view(request):
 class Contact(CreateView):
     model = Contact
     form_class = ContactForm
-    success_url = reverse_lazy("/")
+    # success_url = reverse_lazy("/")
     template_name = 'auth/contact.html'
 
     def post(self, request):
         form = ContactForm(request.POST)
         if request.user.is_authenticated:
-            form.name=request.user.username
-            form.email=request.user.email
+            form.name = request.user.username
+            form.email = request.user.email
+            print(form.name, form.email)
+        print(dir(form))
+        print(form.fields)
         if form.is_valid():
-            f = form.save(commit=False)  
-            print(f)          
-            f.slug = slugify(f.name)
             form.save()
+            print('ok')
             return redirect('/')
         return render(request, 'auth/contact.html', {'form': form})

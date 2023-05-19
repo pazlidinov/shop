@@ -24,7 +24,7 @@
         <div class="col-lg-7 mb-5">
             <div class="contact-form bg-light p-30">
                 <div id="success"></div>
-                <form action="{% url 'accounts:contact' %}" name="sentMessage" id="contactForm" novalidate="novalidate" method="post">
+                <form name="sentMessage" id="contactForm" novalidate="novalidate" method="post">
                     {% csrf_token %}
                     {% if not request.user.is_authenticated %}
                     <div class="control-group">
