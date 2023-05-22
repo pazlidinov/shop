@@ -16,12 +16,8 @@ def homePageView(request):
 
 
 class ProductDetailView(DeleteView):
-    
-
-    def get(self, request, pk):
-        all_products = Product.objects.all()
-    object
-        
+    model = Product
+    template_name = "detail.html"
 
     def my_def(request, pk):
         article = Product.objects.filter(pk=pk).first()
@@ -32,8 +28,8 @@ class ProductDetailView(DeleteView):
             pass
 
 
-def create_comment(request, pk):
-    product = Product.objects.get(pk=pk)
+def create_comment(request, id):
+    product = Product.objects.get(pk=id)
 
     if request.method == "POST":
         comment = request.POST.get("comment")
