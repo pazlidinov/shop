@@ -75,3 +75,6 @@ def add_rating(request):
             return JsonResponse({"status": 200, "updated_rating": product.average_rating})
     else:
         return JsonResponse({"status": 404})
+
+def sort_products(request):
+    return render(request, 'sort_products.html')
