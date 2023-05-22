@@ -16,8 +16,12 @@ def homePageView(request):
 
 
 class ProductDetailView(DeleteView):
-    model = Product
-    template_name = "detail.html"
+    
+
+    def get(self, request, pk):
+        all_products = Product.objects.all()
+    object
+        
 
     def my_def(request, pk):
         article = Product.objects.filter(pk=pk).first()
@@ -26,7 +30,7 @@ class ProductDetailView(DeleteView):
             article.save()
         else:
             pass
-    
+
 
 def create_comment(request, pk):
     product = Product.objects.get(pk=pk)
@@ -76,5 +80,16 @@ def add_rating(request):
     else:
         return JsonResponse({"status": 404})
 
+
 def sort_products(request):
-    return render(request, 'sort_products.html')
+    all_products = Product.objects.all()
+    all_categories = Category.objects.all()
+    all_colors = Color.objects.all()
+    all_sizes = Size.objects.all()
+    data = {
+        'all_products': all_products,
+        'all_categories': all_categories,
+        'all_colors': all_colors,
+        'all_sizes': all_sizes,
+    }
+    return render(request, 'sort_products.html', context=data)
