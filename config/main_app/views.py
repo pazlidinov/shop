@@ -3,7 +3,7 @@ import json
 from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
-from django.views.generic import DetailView
+from django.views.generic.edit import DeleteView
 
 from .models import *
 from .utils import check_article_view
@@ -15,7 +15,7 @@ def homePageView(request):
     return render(request, 'index.html')
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(DeleteView):
     model = Product
     template_name = "detail.html"
 
@@ -26,7 +26,7 @@ class ProductDetailView(DetailView):
             article.save()
         else:
             pass
-
+    
 
 def create_comment(request, pk):
     product = Product.objects.get(pk=pk)
