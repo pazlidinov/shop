@@ -23,25 +23,23 @@
         <div class="col-lg-3 col-md-4">
             <!-- Category Start -->
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by
-                Category</span></h5>
-        <div class="bg-light p-4 mb-30">
-            <form>
-                <a
-                    class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3 text-body text-decoration-none">
-                    <input type="checkbox" class="custom-control-input" checked id="category-all">
-                    <label class="custom-control-label" for="category-all">All Category</label>
-                    <span class="badge border font-weight-normal">{{all_categories.count}}</span>
-                </a>
-                {% for category in all_categories %}
-                <a
-                    class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3 text-body text-decoration-none">
-                    <input type="checkbox" class="custom-control-input" id="category-{{category.id}}">
-                    <label class="custom-control-label" for="category-{{category.id}}">{{category.name}}</label>
-                    <span class="badge border font-weight-normal">{{category.categories.count}}</span>
-                </a>
-                {% endfor %}
-            </form>
-        </div>
+                    Category</span></h5>
+            <div class="bg-light p-4 mb-30">
+                <form>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" checked id="category-all">
+                        <label class="custom-control-label" for="category-all">All Category</label>
+                        <span class="badge border font-weight-normal">{{all_categories.count}}</span>
+                    </div>
+                    {% for category in all_categories %}
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="category-{{category.id}}">
+                        <label class="custom-control-label" for="category-{{category.id}}">{{category.name}}</label>
+                        <span class="badge border font-weight-normal">{{category.categories.count}}</span>
+                    </div>
+                    {% endfor %}
+                </form>
+            </div>
             <!-- Category End -->
             <!-- Price Start -->
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by
@@ -49,36 +47,36 @@
             <div class="bg-light p-4 mb-30">
 
                 <form action="">
-                    <a class="custom-control  d-flex align-items-center justify-content-between mb-3 text-body text-body text-decoration-none">
-                        <input type="checkbox" class="custom-control-input" checked id="price-all">
-                        <span class="custom-control-label" for="price-all">All Price</span>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" checked id="price-0">
+                        <span class="custom-control-label" for="price-">All Price</span>
                         <span class="badge border font-weight-normal">1000</span>
-                    </a>
-                    <a class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3 text-body text-decoration-none">
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" id="price-1">
                         <label class="custom-control-label" for="price-1">$0 - $100</label>
                         <span class="badge border font-weight-normal">150</span>
-                    </a>
-                    <a class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" id="price-2">
                         <label class="custom-control-label" for="price-2">$100 - $200</label>
                         <span class="badge border font-weight-normal">295</span>
-                    </a>
-                    <a class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" id="price-3">
                         <label class="custom-control-label" for="price-3">$200 - $300</label>
                         <span class="badge border font-weight-normal">246</span>
-                    </a>
-                    <a class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" id="price-4">
                         <label class="custom-control-label" for="price-4">$300 - $400</label>
                         <span class="badge border font-weight-normal">145</span>
-                    </a>
-                    <a class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                         <input type="checkbox" class="custom-control-input" id="price-5">
                         <label class="custom-control-label" for="price-5">$400 - $500</label>
                         <span class="badge border font-weight-normal">168</span>
-                    </a>
+                    </div>
                 </form>
 
             </div>
@@ -89,19 +87,17 @@
                     color</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
-                    <a
-                        class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3 text-body text-decoration-none">
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" checked id="color-all">
                         <label class="custom-control-label" for="color-all">All Color</label>
                         <span class="badge border font-weight-normal">{{all_colors.count}}</span>
-                    </a>
+                    </div>
                     {% for color in all_colors %}
-                    <a
-                        class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3 text-body text-decoration-none">
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" id="color-{{color.id}}">
                         <label class="custom-control-label" for="color-{{color.id}}">{{color.name}}</label>
                         <span class="badge border font-weight-normal">{{color.colors.count}}</span>
-                    </a>
+                    </div>
                     {% endfor %}
                 </form>
             </div>
@@ -112,23 +108,24 @@
                     size</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
-                    <a
-                        class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3 text-body text-decoration-none">
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" checked id="size-all">
                         <label class="custom-control-label" for="size-all">All Size</label>
                         <span class="badge border font-weight-normal">{{all_sizes.count}}</span>
-                    </a>
+                    </div>
                     {% for size in all_sizes %}
-                    <a
-                        class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3 text-body text-decoration-none">
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" id="size-{{size.id}}">
                         <label class="custom-control-label" for="size-{{size.id}}">{{size.name}}</label>
                         <span class="badge border font-weight-normal">{{size.sizes.count}}</span>
-                    </a>
+                    </div>
                     {% endfor %}
                 </form>
             </div>
             <!-- Size End -->
+            <a href='#' class="form-group mb-0 d-flex justify-content-end">
+                <input type="submit" value="Filter" class="btn btn-primary px-3">
+            </a>
         </div>
         <!-- Shop Sidebar End -->
 
