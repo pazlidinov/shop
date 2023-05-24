@@ -33,9 +33,9 @@
                     </div>
                     {% for category in all_categories %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" onclick='check_fun("{{category.slug}}")'
-                            class="custom-control-input category" id="{{category.slug}}">
-                        <label class="custom-control-label" for="{{category.slug}}">{{category.name}}</label>
+                        <input type="checkbox" onclick='check_fun("ca{{category.id}}")'
+                            class="custom-control-input category" id="ca{{category.id}}">
+                        <label class="custom-control-label" for="ca{{category.id}}">{{category.name}}</label>
                         <span class="badge border font-weight-normal">{{category.categories.count}}</span>
                     </div>
                     {% endfor %}
@@ -95,8 +95,8 @@
                     </div>
                     {% for color in all_colors %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input color" id="{{color.slug}}" onclick='check_fun("{{color.slug}}")'>
-                        <label class="custom-control-label" for="{{color.slug}}">{{color.name}}</label>
+                        <input type="checkbox" class="custom-control-input color" id="co{{color.id}}" onclick='check_fun("co{{color.id}}")'>
+                        <label class="custom-control-label" for="co{{color.id}}">{{color.name}}</label>
                         <span class="badge border font-weight-normal">{{color.colors.count}}</span>
                     </div>
                     {% endfor %}
@@ -116,8 +116,8 @@
                     </div>
                     {% for size in all_sizes %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input size" id="{{size.slug}}" onclick='check_fun("{{size.slug}}")'>
-                        <label class="custom-control-label" for="{{size.slug}}">{{size.name}}</label>
+                        <input type="checkbox" class="custom-control-input size" id="s{{size.id}}" onclick='check_fun("s{{size.id}}")'>
+                        <label class="custom-control-label" for="s{{size.id}}">{{size.name}}</label>
                         <span class="badge border font-weight-normal">{{size.sizes.count}}</span>
                     </div>
                     {% endfor %}

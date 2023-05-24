@@ -1,5 +1,5 @@
-function check_fun(slug) {
-    let chek = document.getElementById(slug)
+function check_fun(id) {
+    let chek = document.getElementById(id)
     if (chek.ariaChecked == 'true') {
         chek.ariaChecked = 'false'
     }
@@ -22,12 +22,9 @@ function key_word() {
 
     for (let i = 0; i < category_slug.length; i++) {
         if (category_slug[i].ariaChecked == 'true') {
-            if (i == (category_slug.length - 1)) {
-                key_category += category_slug[i].id
-            }
-            else {
-                key_category += category_slug[i].id + '+'
-            }
+
+            key_category += category_slug[i].id[2] + '+'
+
         }
     }
     console.log(category_slug[-1])
@@ -36,7 +33,7 @@ function key_word() {
     for (let i = 0; i < color_slug.length; i++) {
         if (color_slug[i].ariaChecked == 'true') {
 
-            key_category += color_slug[i].id + '+'
+            key_category += color_slug[i].id[2] + '+'
         }
     }
 
@@ -44,9 +41,10 @@ function key_word() {
 
     for (let i = 0; i < size_slug.length; i++) {
         if (size_slug[i].ariaChecked == 'true') {
-            key_category += size_slug[i].id + '+'
+            key_category += size_slug[i].id[1] + '+'
         }
     }
+
 
     a_link.href = "{% url 'main_app:sort_products' " + key_category + " %}"
 
