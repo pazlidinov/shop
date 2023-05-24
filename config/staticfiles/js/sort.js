@@ -22,14 +22,20 @@ function key_word() {
 
     for (let i = 0; i < category_slug.length; i++) {
         if (category_slug[i].ariaChecked == 'true') {
-            key_category += category_slug[i].id + '+'
+            if (i == (category_slug.length - 1)) {
+                key_category += category_slug[i].id
+            }
+            else {
+                key_category += category_slug[i].id + '+'
+            }
         }
     }
-
+    console.log(category_slug[-1])
     key_category += '*'
 
     for (let i = 0; i < color_slug.length; i++) {
         if (color_slug[i].ariaChecked == 'true') {
+
             key_category += color_slug[i].id + '+'
         }
     }
@@ -42,6 +48,6 @@ function key_word() {
         }
     }
 
-    a_link.href="{% url 'main_app:sort_products' " + key_category + " %}"
+    a_link.href = "{% url 'main_app:sort_products' " + key_category + " %}"
 
 }

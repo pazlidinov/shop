@@ -12,6 +12,7 @@ urlpatterns = [
     path('add/rating/', views.add_rating, name="add_rating"),
     
     # sort
-    path('sort/<str:key_word>', views.sort_products, name="sort_products"),
+    path('sort/', views.sort_products, name="sort_products"),
+    path('sort/<str:key_word>', views.sort_key_products, name="sort_key_products"),
 
 ]
