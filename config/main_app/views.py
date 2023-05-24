@@ -77,7 +77,7 @@ def add_rating(request):
         return JsonResponse({"status": 404})
 
 
-def sort_products(request):
+def sort_products(request, key_word):
     all_products = Product.objects.all()
     all_categories = Category.objects.all()
     all_colors = Color.objects.all()
@@ -88,4 +88,15 @@ def sort_products(request):
         'all_colors': all_colors,
         'all_sizes': all_sizes,
     }
+
+    lis = key_word.split(' ')
+    lis = lis[3].split('*')
+    print(lis)
+
+    nam = lis[0]
+
+    cat = lis[1].split('+')
+    col = lis[2].split('+')
+    siz = lis[3].split('+')
+
     return render(request, 'sort_products.html', context=data)

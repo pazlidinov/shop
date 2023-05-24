@@ -33,7 +33,8 @@
                     </div>
                     {% for category in all_categories %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" onclick='check_fun("{{category.slug}}")'class="custom-control-input category" id="{{category.slug}}" ariaChecked="false">
+                        <input type="checkbox" onclick='check_fun("{{category.slug}}")'
+                            class="custom-control-input category" id="{{category.slug}}">
                         <label class="custom-control-label" for="{{category.slug}}">{{category.name}}</label>
                         <span class="badge border font-weight-normal">{{category.categories.count}}</span>
                     </div>
@@ -94,7 +95,7 @@
                     </div>
                     {% for color in all_colors %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input color" id="{{color.slug}}">
+                        <input type="checkbox" class="custom-control-input color" id="{{color.slug}}" onclick='check_fun("{{color.slug}}")'>
                         <label class="custom-control-label" for="{{color.slug}}">{{color.name}}</label>
                         <span class="badge border font-weight-normal">{{color.colors.count}}</span>
                     </div>
@@ -115,7 +116,7 @@
                     </div>
                     {% for size in all_sizes %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input size" id="{{size.slug}}">
+                        <input type="checkbox" class="custom-control-input size" id="{{size.slug}}" onclick='check_fun("{{size.slug}}")'>
                         <label class="custom-control-label" for="{{size.slug}}">{{size.name}}</label>
                         <span class="badge border font-weight-normal">{{size.sizes.count}}</span>
                     </div>
@@ -123,7 +124,7 @@
                 </form>
             </div>
             <!-- Size End -->
-            <a href='#' class="form-group mb-0 d-flex justify-content-end">
+            <a class="form-group mb-0 d-flex justify-content-end" id="filter" onclick="key_word()">
                 <input type="submit" value="Filter" class="btn btn-primary px-3">
             </a>
         </div>
@@ -208,21 +209,5 @@
     </div>
 </div>
 <!-- Shop End -->
-<script>
-    function check_fun(slug){
-        let chek=document.getElementById(slug)
-        if(chek.ariaChecked==null || chek.ariaChecked==false){
-            chek.ariaChecked=true}
-        else{
-            chek.ariaChecked=false
-        }
-        console.log('00000')
-        let category_slug = document.getElementsByClassName('category');
-        for (let i = 0; i < category_slug.length; i++) {
-           
-            console.log(category_slug[i].id,);
-            console.log(category_slug[i].ariaChecked)
-        }
-    }
-</script>
+<script type="text/javascript" src="{% static 'js/sort.js' %}"></script>
 {% endblock content %}
