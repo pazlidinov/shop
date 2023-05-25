@@ -154,12 +154,8 @@
                             <a href="{% url 'main_app:sort_products' %}" class="nav-item nav-link">Shop</a>
                             <a href="{% url 'main_app:detail' pk=1 %}" class="nav-item nav-link">Shop Detail</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i
-                                        class="fa fa-angle-down mt-1"></i></a>
-                                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                </div>
+                                <a href="{% url 'cart:cart' %}" class="nav-link">Shopping Cart</a>
+
                             </div>
                             <a href="{% url 'accounts:contact' %}" class="nav-item nav-link">Contact</a>
                         </div>
