@@ -38,7 +38,8 @@ class AddToCartView(View):
 
 def cart_remove(request, id):
     cart = cart_init(request)
-    cart.product.filter(id=id).delete()
+    cart.remove_cart(id)
+    # cart.product.filter(id=id).delete()
     return redirect('/cart/')
 
 

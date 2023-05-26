@@ -24,6 +24,14 @@ class Cart(models.Model):
 
     def add(self, product_id):
         product = Product.objects.get(id=product_id)
+        # try:
+        #     # print(CardProduct.product.filter(id=product.id))
+        #     for item in CardProduct.products:
+        #         print(item)
+        #     print('ok')
+        # except:
+        #     print("none")
+         
         self.product.create(
             product=product,
             quantity=1,
@@ -33,6 +41,13 @@ class Cart(models.Model):
         self.total_price += product.get_discount_price()
         self.save()
         return True
+
+    def remove_cart(self, id):
+        r = self.product.get(id=id)        
+        self.total_quantity -= r.quantity
+        self.total_price -= r.price*r.quantity
+        r.delete()
+        self.save()
 
     def clear_cart(self):
         self.delete()
