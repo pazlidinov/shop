@@ -3,7 +3,7 @@ import json
 from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
-from django.views.generic.edit import DeleteView
+from django.views.generic.detail import DetailView
 from django.db.models import Q
 from .models import *
 from .utils import check_article_view
@@ -15,12 +15,12 @@ def homePageView(request):
     return render(request, 'index.html')
 
 
-class ProductDetailView(DeleteView):
+class ProductDetailView(DetailView):
     model = Product
     template_name = "detail.html"
 
     def my_def(request, pk):
-        article = Product.objects.filter(pk=pk).first()
+        article = Product.objects.get(pk=pk)
         if check_article_view(request, pk):
             article.view += 1
             article.save()
@@ -29,8 +29,8 @@ class ProductDetailView(DeleteView):
 
 
 def create_comment(request, id):
-    product = Product.objects.get(pk=id)
-
+    product = Product.objects.get(id=id)
+    
     if request.method == "POST":
         comment = request.POST.get("comment")
         u = None
@@ -41,8 +41,8 @@ def create_comment(request, id):
 
         if len(comment) > 3:
             Comment.objects.create(product=product, user=u, comment=comment)
-
-    return redirect("home:detail", pk)
+            
+    return redirect("home:detail", id)
 
 
 def delete_comment(request, comment_id):

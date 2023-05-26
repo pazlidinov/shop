@@ -47,6 +47,9 @@
                                 {% endfor %}
                                 <small>({{item.view}})</small>
                         </div>
+                        <br>
+                        <a href="{% url 'cart:liked_remove' item.id %}" class="btn btn-sm btn-danger"><i
+                            class="fa fa-times"></i></a>
                     </div>
                 </div>
             </div>

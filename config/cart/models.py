@@ -78,3 +78,8 @@ class LikedCart(models.Model):
         self.product.add(product)
         self.save()
         return True
+
+    def remove_likes(self, id):
+        l = self.product.get(id=id)
+        l.remove()
+        self.save()

@@ -35,8 +35,8 @@ class CartView(View):
 class AddToCartView(View):
 
     def get(self, request, product_id):
-        cart = cart_init(request)       
-        if cart:            
+        cart = cart_init(request)
+        if cart:
             cart.add(product_id)
             return redirect('/cart/')
 
@@ -83,3 +83,9 @@ class AddToLikedView(View):
             return redirect('/cart/liked/')
 
         return render(request, 'liked.html', {"liked": liked})
+
+
+def liked_remove(request, id):
+    liked = liked_cart_init(request)
+    liked.remove_likes(id)
+    return redirect('/cart/liked/')

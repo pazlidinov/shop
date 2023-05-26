@@ -16,5 +16,6 @@ urlpatterns = [
     # Liked
     path('liked/', views.LikedView.as_view(), name='liked'),
     path('liked/add/<int:product_id>', views.AddToLikedView.as_view(), name='add_to_liked'),
+    path('liked/remove/<int:id>', views.liked_remove, name='liked_remove'),
 
 ]
