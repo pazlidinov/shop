@@ -27,6 +27,7 @@
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Total</th>
+                        <th>Update</th>
                         <th>Remove</th>
                     </tr>
                 </thead>
@@ -44,11 +45,11 @@
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                               
-                                    <input type="text" name="quantity"
-                                        class="form-control form-control-sm bg-secondary border-0 text-center"
-                                        value="{{object.quantity}}">
-                                   
+
+                                <input type="text" name="quantity"
+                                    class="form-control form-control-sm bg-secondary border-0 text-center"
+                                    value="{{object.quantity}}">
+
                                 <div class="input-group-btn">
                                     <button class="btn btn-sm btn-primary btn-plus" onclick="cart_update()">
                                         <i class="fa fa-plus"></i>
@@ -58,6 +59,9 @@
                             </form>
                         </td>
                         <td class="align-middle">${{object.price}}</td>
+                        <td>
+                            <a href="" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Update</a>
+                        </td>
                         <td class="align-middle">
                             <a href="{% url 'cart:cart_remove' object.id %}" class="btn btn-sm btn-danger"><i
                                     class="fa fa-times"></i></a>
@@ -66,7 +70,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-
+          
         </div>
         <div class="col-lg-4">
             <form class="mb-30" action="">
