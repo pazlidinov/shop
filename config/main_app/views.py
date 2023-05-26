@@ -20,7 +20,9 @@ class ProductDetailView(DetailView):
     template_name = "detail.html"
 
     def my_def(request, pk):
+        print('ok')
         article = Product.objects.get(pk=pk)
+        print(article)
         if check_article_view(request, pk):
             article.view += 1
             article.save()

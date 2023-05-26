@@ -80,6 +80,4 @@ class LikedCart(models.Model):
         return True
 
     def remove_likes(self, id):
-        l = self.product.get(id=id)
-        l.remove()
-        self.save()
+        self.delete()
