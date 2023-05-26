@@ -3,7 +3,7 @@ from django.views.generic.base import View
 
 # Create your views here.
 from main_app.models import Product
-from .models import Cart, CardProduct
+from .models import Cart, CardProduct, LikedCart
 
 
 def cart_init(request):
@@ -13,6 +13,15 @@ def cart_init(request):
         cart = Cart.objects.create()  # yangi cart object hosil qilish
         request.session['user_cart_id'] = cart.id
     return cart
+
+
+def liked_cart_init(request):
+    try:
+        liked = LikedCart.objects.get(id=request.session.get('user_liked_id'))
+    except:
+        liked = LikedCart.objects.create()  # yangi cart object hosil qilish
+        request.session['user_liked_id'] = liked.id
+    return liked
 
 
 class CartView(View):
@@ -26,12 +35,10 @@ class CartView(View):
 class AddToCartView(View):
 
     def get(self, request, product_id):
-        cart = cart_init(request)
-        # z=Product.objects.get(id=product_id)
-        if cart:
-            if not cart.product.filter(id=product_id):
-                cart.add(product_id)
-                return redirect('/cart/')
+        cart = cart_init(request)       
+        if cart:            
+            cart.add(product_id)
+            return redirect('/cart/')
 
         return render(request, 'cart.html', {"cart": cart})
 
@@ -57,3 +64,22 @@ def cart_delete(request):
     cart = cart_init(request)
     cart.clear_cart()
     return redirect('/cart/')
+
+
+class LikedView(View):
+
+    def get(self, request):
+        liked = liked_cart_init(request)
+
+        return render(request, 'liked.html', {"liked": liked})
+
+
+class AddToLikedView(View):
+
+    def get(self, request, product_id):
+        liked = liked_cart_init(request)
+        if liked:
+            liked.add(product_id)
+            return redirect('/cart/liked/')
+
+        return render(request, 'liked.html', {"liked": liked})

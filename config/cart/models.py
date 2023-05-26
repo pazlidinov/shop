@@ -31,7 +31,7 @@ class Cart(models.Model):
         #     print('ok')
         # except:
         #     print("none")
-         
+
         self.product.create(
             product=product,
             quantity=1,
@@ -43,7 +43,7 @@ class Cart(models.Model):
         return True
 
     def remove_cart(self, id):
-        r = self.product.get(id=id)        
+        r = self.product.get(id=id)
         self.total_quantity -= r.quantity
         self.total_price -= r.price*r.quantity
         r.delete()
@@ -64,3 +64,17 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"Cart = {self.id}"
+
+
+# class LikedProduct(models.Model):
+#     product = models.ForeignKey(
+#         Product, on_delete=models.CASCADE, related_name="liked_products")
+
+class LikedCart(models.Model):
+    product = models.ManyToManyField(Product, related_name='liked_products')
+
+    def add(self, product_id):
+        product = Product.objects.get(id=product_id)
+        self.product.add(product)
+        self.save()
+        return True
