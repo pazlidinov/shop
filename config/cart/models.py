@@ -45,11 +45,13 @@ class Cart(models.Model):
         self.delete()
 
     def update_item(self, item_id, qty):
-        obj = self.products.get(id=item_id)
+        print(item_id, qty)
+        obj = self.product.get(id=item_id)
+        print(obj)
         self.total_price = self.total_price + \
             (obj.product.get_discount_price()*(int(qty)-obj.quantity))
         self.total_quantity = self.total_quantity+(int(qty)-obj.quantity)
-        obj.quantity = qty
+        obj.quantity = qty+1
         obj.price = obj.product.get_discount_price() * int(qty)
         obj.save()
         self.save()

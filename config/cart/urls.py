@@ -11,11 +11,11 @@ urlpatterns = [
     # Cart
     path('cart/delete/', views.cart_delete, name='cart_delete'),
     path('cart/remove/<int:id>', views.cart_remove, name='cart_remove'),
-    path('cart/update/', views.cart_item_update, name='cart_item_update'),
+    path('update/<str:key_update>', views.cart_item_update, name='cart_item_update'),
     
     # Liked
-    path('liked/', views.LikedView.as_view(), name='liked'),
-    path('liked/add/<int:product_id>', views.AddToLikedView.as_view(), name='add_to_liked'),
+    path('liked/', views.LikedView, name='liked'),
+    path('liked/add/<int:product_id>', views.AddToLikedView, name='add_to_liked'),
     path('liked/remove/<int:id>', views.liked_remove, name='liked_remove'),
 
 ]

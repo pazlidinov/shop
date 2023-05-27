@@ -49,3 +49,10 @@ function key_word() {
     a_link.href = "{% url 'main_app:sort_products' " + key_category + " %}"
 
 }
+function cart_update(id) {
+    let update_value = document.getElementById('quantity')
+    let a_link = document.getElementById('update')
+    key_update = String(id + '+' + update_value.value)
+    
+    a_link.href = "update/" + key_update
+}

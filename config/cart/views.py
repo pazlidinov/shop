@@ -47,12 +47,13 @@ def cart_remove(request, id):
     return redirect('/cart/')
 
 
-def cart_item_update(request):
+def cart_item_update(request, key_update):
     cart = cart_init(request)
+    key_update = key_update.split('+')
 
-    obj_id = int(request.GET.get('object_id'))
-    qty = request.GET.get("quantity")
-
+    obj_id = int(key_update[0])
+    qty = int(key_update[1])
+    print(key_update)
     cart.update_item(obj_id, qty)
     return redirect('/cart/')
 
@@ -63,23 +64,17 @@ def cart_delete(request):
     return redirect('/cart/')
 
 
-class LikedView(View):
-
-    def get(self, request):
-        liked = liked_cart_init(request)
-
-        return render(request, 'liked.html', {"liked": liked})
+def LikedView(request):
+    liked = liked_cart_init(request)
+    return render(request, 'liked.html', {"liked": liked})
 
 
-class AddToLikedView(View):
-
-    def get(self, request, product_id):
-        liked = liked_cart_init(request)
-        if liked:
-            liked.add(product_id)
-            return redirect('/cart/liked/')
-
-        return render(request, 'liked.html', {"liked": liked})
+def AddToLikedView(request, product_id):
+    liked = liked_cart_init(request)
+    if liked:
+        liked.add(product_id)
+        return redirect('/cart/liked/')
+    return render(request, 'liked.html', {"liked": liked})
 
 
 def liked_remove(request, id):

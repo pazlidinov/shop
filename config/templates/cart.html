@@ -41,17 +41,19 @@
                         <td class="align-middle">
                             <div class="input-group quantity mx-auto" style="width: 100px;">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus" onclick='cart_update()'>
+                                    <button onclick='cart_update({{object.id}})'
+                                        class="btn btn-sm btn-primary btn-minus">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
 
-                                <input type="text" name="quantity"
+                                <input type="text" id="quantity"
                                     class="form-control form-control-sm bg-secondary border-0 text-center"
                                     value="{{object.quantity}}">
 
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus" onclick="cart_update()">
+                                    <button class="btn btn-sm btn-primary btn-plus"
+                                        onclick="cart_update({{object.id}})">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div><br><br>
@@ -60,7 +62,7 @@
                         </td>
                         <td class="align-middle">${{object.price}}</td>
                         <td>
-                            <a href="" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Update</a>
+                            <a id="update" class="btn btn-block btn-primary font-weight-bold my-3 py-3 ">Update</a>
                         </td>
                         <td class="align-middle">
                             <a href="{% url 'cart:cart_remove' object.id %}" class="btn btn-sm btn-danger"><i
@@ -70,7 +72,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-          
+
         </div>
         <div class="col-lg-4">
             <form class="mb-30" action="">
@@ -109,5 +111,9 @@
 </div>
 <!-- Cart End -->
 
+<script type="text/javascript" src="{% static 'js/sort.js' %}"></script>
+<script>
 
+   
+</script>
 {% endblock content %}

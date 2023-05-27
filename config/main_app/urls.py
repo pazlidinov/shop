@@ -14,5 +14,6 @@ urlpatterns = [
     # sort
     path('sort/', views.sort_products, name="sort_products"),
     path('sort/<str:key_word>', views.sort_key_products, name="sort_key_products"),
+    path('sort/sort_by_category/<int:id>', views.sort_by_category, name="sort_by_category"),
 
 ]
