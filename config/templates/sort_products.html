@@ -26,11 +26,7 @@
                     Category</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="category-all">
-                        <label class="custom-control-label" for="category-all">All Category</label>
-                        <span class="badge border font-weight-normal">{{all_categories.count}}</span>
-                    </div>
+                   
                     {% for category in all_categories %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" onclick='check_fun("ca{{category.id}}")'
@@ -48,11 +44,7 @@
                     color</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="color-all">
-                        <label class="custom-control-label" for="color-all">All Color</label>
-                        <span class="badge border font-weight-normal">{{all_colors.count}}</span>
-                    </div>
+                    
                     {% for color in all_colors %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input color" id="co{{color.id}}" onclick='check_fun("co{{color.id}}")'>
@@ -69,11 +61,7 @@
                     size</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="size-all">
-                        <label class="custom-control-label" for="size-all">All Size</label>
-                        <span class="badge border font-weight-normal">{{all_sizes.count}}</span>
-                    </div>
+                    
                     {% for size in all_sizes %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input size" id="s{{size.id}}" onclick='check_fun("s{{size.id}}")'>

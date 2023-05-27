@@ -88,19 +88,7 @@
                     </form>
                 </div>
                 <div class="d-flex align-items-center mb-4 pt-2">
-                    <!-- <div class="input-group quantity mr-3" style="width: 130px;">
-                        <div class="input-group-btn">
-                            <button onclick="minus()" class="btn btn-primary btn-minus">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <input id='count' type="text" class="form-control bg-secondary border-0 text-center" value="1">
-                        <div class="input-group-btn">
-                            <button onclick="plus()" class="btn btn-primary btn-plus">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                    </div> -->
+                   
                     <a href="{% url 'cart:add_to_cart' object.id %}" class="btn btn-primary px-3"><i
                             class="fa fa-shopping-cart mr-1"></i> Add To
                         Cart</a>
@@ -129,8 +117,7 @@
         <div class="col">
             <div class="bg-light p-30 ">
                 <div class="nav nav-tabs mb-4 d-flex justify-content-center">
-                    <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                    <!-- <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a> -->
+                    <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>                    
                     <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews
                         ({{object.product_comments.count}})</a>
                 </div>
@@ -264,15 +251,7 @@
                                     <label for="message">Your Review *</label>
                                     <textarea name="comment" id="message" cols="30" rows="5"
                                         class="form-control"></textarea>
-                            </div>
-                            <!-- <div class="form-group">
-                                        <label for="name">Your Name *</label>
-                                        <input type="text" class="form-control" id="name">
-                                    </div> -->
-                            <!-- <div class="form-group">
-                                        <label for="email">Your Email *</label>
-                                        <input type="email" class="form-control" id="email">
-                                    </div> -->
+                            </div>                           
                             <div class="form-group mb-0">
                                 <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
                             </div>

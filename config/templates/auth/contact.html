@@ -26,16 +26,7 @@
                 <div id="success"></div>
                 <form name="sentMessage" id="contactForm" novalidate="novalidate" method="post">
                     {% csrf_token %}
-                    <!-- {% if not request.user.is_authenticated %}
-                    <div class="control-group">
-                        {{form.name}}
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        {{form.email}}
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    {% endif %} -->
+                    
                     <div class="control-group">
                         {{form.subject}}
                         <p class="help-block text-danger"></p>

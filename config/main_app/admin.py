@@ -8,9 +8,7 @@ from .models import *
 
 @admin.register(Product_img)
 class Product_imgAdmin(admin.ModelAdmin):
-    list_display = ['id', 'image_tag', 'image']
-    # list_editable = ['image']
-    # list_display_links = ['image']
+    list_display = ['id', 'image_tag', 'image']    
     list_per_page = 10
     readonly_fields = ['image_tag']
 

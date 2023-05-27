@@ -22,16 +22,8 @@ class Cart(models.Model):
     total_quantity = models.PositiveIntegerField(default=0)
     total_price = models.PositiveIntegerField(default=0)
 
-    def add(self, product_id):
+    def add(self, request, product_id):
         product = Product.objects.get(id=product_id)
-        # try:
-        #     # print(CardProduct.product.filter(id=product.id))
-        #     for item in CardProduct.products:
-        #         print(item)
-        #     print('ok')
-        # except:
-        #     print("none")
-
         self.product.create(
             product=product,
             quantity=1,
@@ -65,10 +57,6 @@ class Cart(models.Model):
     def __str__(self):
         return f"Cart = {self.id}"
 
-
-# class LikedProduct(models.Model):
-#     product = models.ForeignKey(
-#         Product, on_delete=models.CASCADE, related_name="liked_products")
 
 class LikedCart(models.Model):
     product = models.ManyToManyField(Product, related_name='liked_products')

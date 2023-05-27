@@ -32,15 +32,12 @@ class CartView(View):
         return render(request, 'cart.html', {"cart": cart})
 
 
-class AddToCartView(View):
-
-    def get(self, request, product_id):
-        cart = cart_init(request)
-        if cart:
-            cart.add(product_id)
-            return redirect('/cart/')
-
-        return render(request, 'cart.html', {"cart": cart})
+def AddToCartView(request, product_id):
+    cart = cart_init(request)
+    if cart.add(request, product_id):
+        # cart.add(product_id)
+        return redirect('/cart/')
+    return render(request, 'cart.html', {"cart": cart})
 
 
 def cart_remove(request, id):
