@@ -29,7 +29,7 @@
                     <div class="carousel-item active text-center">
                         <img class="object-fit-cover" src="{{ object.img.url }}" alt="Image" height="600">
                     </div>
-                    {% for item in object.product_img.all %}
+                    {% for item in detail_product.product_img.all %}
                     <div class="carousel-item text-center">
                         <img class="object-fit-cover" src="{{ item.image.url }}" alt="Image"" height=" 600">
                     </div>
@@ -87,11 +87,10 @@
                         {% endfor %}
                     </form>
                 </div>
-                <div class="d-flex align-items-center mb-4 pt-2">
-                   
+                <div class="d-flex align-items-center mb-4 pt-2">                   
                     <a href="{% url 'cart:add_to_cart' object.id %}" class="btn btn-primary px-3"><i
-                            class="fa fa-shopping-cart mr-1"></i> Add To
-                        Cart</a>
+                        class="fa fa-shopping-cart mr-1"></i> Add To
+                    Cart</a>
                 </div>
                 <div class="d-flex pt-2">
                     <strong class="text-dark mr-2">Share on:</strong>

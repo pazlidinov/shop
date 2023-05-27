@@ -26,7 +26,7 @@
                     Category</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
-                   
+
                     {% for category in all_categories %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" onclick='check_fun("ca{{category.id}}")'
@@ -37,17 +37,18 @@
                     {% endfor %}
                 </form>
             </div>
-            <!-- Category End -->            
+            <!-- Category End -->
 
             <!-- Color Start -->
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by
                     color</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
-                    
+
                     {% for color in all_colors %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input color" id="co{{color.id}}" onclick='check_fun("co{{color.id}}")'>
+                        <input type="checkbox" class="custom-control-input color" id="co{{color.id}}"
+                            onclick='check_fun("co{{color.id}}")'>
                         <label class="custom-control-label" for="co{{color.id}}">{{color.name}}</label>
                         <span class="badge border font-weight-normal">{{color.colors.count}}</span>
                     </div>
@@ -61,10 +62,11 @@
                     size</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
-                    
+
                     {% for size in all_sizes %}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input size" id="s{{size.id}}" onclick='check_fun("s{{size.id}}")'>
+                        <input type="checkbox" class="custom-control-input size" id="s{{size.id}}"
+                            onclick='check_fun("s{{size.id}}")'>
                         <label class="custom-control-label" for="s{{size.id}}">{{size.name}}</label>
                         <span class="badge border font-weight-normal">{{size.sizes.count}}</span>
                     </div>
@@ -78,7 +80,7 @@
         </div>
         <!-- Shop Sidebar End -->
 
-
+        {% if item in all_products %}
         <!-- Shop Product Start -->
         <div class="col-lg-9 col-md-8">
             <div class="row pb-3">
@@ -112,18 +114,21 @@
                 </div>
                 {% for item in all_products %}
                 <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
                             <img class="img-fluid" src="{{item.img.url}}" alt="" height="500">
                             <div class="product-action">
-                                <a href="{% url 'cart:add_to_cart' item.id %}" class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <a href="{% url 'cart:add_to_liked' item.id %}" class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a href="{% url 'cart:add_to_cart' item.id %}" class="btn btn-outline-dark btn-square"
+                                    href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a href="{% url 'cart:add_to_liked' item.id %}" class="btn btn-outline-dark btn-square"
+                                    href=""><i class="far fa-heart"></i></a>
 
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="{% url 'main_app:detail' item.id %}">{{item.name|title}}</a>
+                            <a class="h6 text-decoration-none text-truncate"
+                                href="{% url 'main_app:detail' item.id %}">{{item.name|title}}</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <h5>${{item.get_discount_price}}</h5>
                                 <h6 class="text-muted ml-2"><del>${{item.price}}</del></h6>
@@ -134,13 +139,25 @@
                                     {% else %}
                                     <i class="far fa-star"></i>
                                     {% endif %}
-                                    {% endfor %}                           
+                                    {% endfor %}
                                     <small>({{item.view}})</small>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 {% endfor %}
+
+                {% else %}
+                <div class="container col-lg-4 col-md-6 col-sm-6 pb-1">
+                    <h5 class="section-title position-relative text-uppercase mb-3">
+                        <span class="bg-secondary pr-3">
+                            Product not found
+                        </span>
+                    </h5>
+
+                </div>
+                {% endif %}
                 <div class="col-12">
                     <nav>
                         <ul class="pagination justify-content-center">
@@ -155,6 +172,7 @@
             </div>
         </div>
         <!-- Shop Product End -->
+
     </div>
 </div>
 <!-- Shop End -->

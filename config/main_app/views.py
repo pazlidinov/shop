@@ -17,17 +17,15 @@ def homePageView(request):
 
 class ProductDetailView(DetailView):
     model = Product
-    template_name = "detail.html"
+    template_name = 'detail.html'
 
     def my_def(request, pk):
-        print('ok')
-        article = Product.objects.get(pk=pk)
-        print(article)
+        product = Product.objects.get(pk=pk)
         if check_article_view(request, pk):
-            article.view += 1
-            article.save()
+            product.update_view()
         else:
             pass
+        # return render(request, 'detail.html')
 
 
 def create_comment(request, id):

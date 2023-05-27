@@ -66,6 +66,10 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def update_view(self):
+        self.view += 1
+        self.save()
+
     class Meta:
         ordering = ["-id"]
 
