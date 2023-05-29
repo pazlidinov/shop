@@ -46,7 +46,7 @@ def my_register_view(request):
         context = {
             'form': form
         }
-    return render(request, 'auth/register.html', context)
+    return render(request, 'auth/register.html', context=context)
 
 
 class Contact(LoginRequiredMixin, CreateView):

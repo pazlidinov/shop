@@ -25,7 +25,7 @@ class ProductDetailView(DetailView):
             product.update_view()
         else:
             pass
-        # return render(request, 'detail.html')
+        return render(request, 'detail.html')
 
 
 def create_comment(request, id):
@@ -86,8 +86,8 @@ def sort_products(request):
 
 
 def sort_key_products(request, key_word):
-    lis = key_word.split(' ')
-    lis = lis[3].split('*')
+    # lis = key_word.split(' ')
+    lis = key_word.split('*')
 
     nam = lis[0]
     cat = lis[1].split('+')

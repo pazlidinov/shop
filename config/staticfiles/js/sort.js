@@ -46,8 +46,8 @@ function key_word() {
     }
 
 
-    a_link.href = "{% url 'main_app:sort_products' " + key_category + " %}"
-
+    // a_link.href = "{% url 'main_app:sort_products' " + key_category + " %}"
+    a_link.href = key_category
 }
 function cart_update(id) {
     let update_value = document.getElementById('quantity')
