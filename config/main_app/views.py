@@ -90,10 +90,10 @@ def sort_key_products(request, key_word):
     lis = key_word.split('*')
 
     nam = lis[0]
-    cat = lis[1].split('+')
-    col = lis[2].split('+')
-    siz = lis[3].split('+')
-    cat.remove('')
+    # cat = lis[1].split('+')
+    col = lis[1].split('+')
+    siz = lis[2].split('+')
+    # cat.remove('')
     col.remove('')
     siz.remove('')
 
@@ -101,8 +101,8 @@ def sort_key_products(request, key_word):
         p = Product.objects.filter(name__icontains=nam).order_by('-id')
     else:
         p = Product.objects.all().order_by('-id')
-    if len(cat) > 0:
-        p.filter(category__in=cat)
+    # if len(cat) > 0:
+    #     p.filter(category__in=cat)
     if len(col) > 0:
         p = p.filter(color__in=col)
     if len(siz) > 0:

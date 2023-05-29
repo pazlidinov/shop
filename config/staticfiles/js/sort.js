@@ -14,21 +14,21 @@ function key_word() {
     console.log('00000')
     let a_link = document.getElementById('filter')
     let name_input = document.getElementById('search')
-    let category_slug = document.getElementsByClassName('category');
+    // let category_slug = document.getElementsByClassName('category');
     let color_slug = document.getElementsByClassName('color');
     let size_slug = document.getElementsByClassName('size');
 
     key_category += name_input.value + '*'
 
-    for (let i = 0; i < category_slug.length; i++) {
-        if (category_slug[i].ariaChecked == 'true') {
+    // for (let i = 0; i < category_slug.length; i++) {
+    //     if (category_slug[i].ariaChecked == 'true') {
 
-            key_category += category_slug[i].id[2] + '+'
+    //         key_category += category_slug[i].id[2] + '+'
 
-        }
-    }
-    console.log(category_slug[-1])
-    key_category += '*'
+    //     }
+    // }
+    // console.log(category_slug[-1])
+    // key_category += '*'
 
     for (let i = 0; i < color_slug.length; i++) {
         if (color_slug[i].ariaChecked == 'true') {
