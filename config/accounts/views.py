@@ -6,7 +6,7 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 
-from .forms import ContactForm, CustomUserCreationForm
+from .forms import ContactForm, RegisterForm
 from .models import Contact
 
 
@@ -37,16 +37,17 @@ def logged_out(request):
 
 def my_register_view(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
-            u.save()
-            return redirect("/")
-    else:
-        form = CustomUserCreationForm()
-        context = {
-            'form': form
-        }
-    return render(request, 'auth/register.html', context=context)
+            print('ok1')
+            return redirect('accounts:login')  
+    
+    form = RegisterForm()
+    data = {
+        'form': form
+    }
+        # return render(request, 'auth/register.html', context=data)
+    return render(request, 'auth/register.html', context=data)
 
 
 class Contact(LoginRequiredMixin, CreateView):
